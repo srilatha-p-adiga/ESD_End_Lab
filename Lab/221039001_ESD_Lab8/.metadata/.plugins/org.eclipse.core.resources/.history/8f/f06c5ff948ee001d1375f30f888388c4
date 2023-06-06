@@ -1,0 +1,67 @@
+package week8;
+import java.util.Arrays;
+import java.util.Random;
+
+public class testClass {
+		public static void main(String[] args) {
+			
+			//1.Factorial
+			useme var=n->fact(n);
+			System.out.println("Factorial of 10: "+var.check(10)+"\n");
+			
+			//2.check char type
+			var=n->checkChar(n);
+			var.check((int)'a');
+			var.check((int)'0');
+			var.check((int)'&');
+			
+			//3.check number prime or not
+			var=n->prime(n);
+			System.out.println("\n"+"15 is "+(var.check(15)==1?"Prime":"Not prime"));
+			System.out.println("2 is "+(var.check(2)==1?"Prime":"Not prime")+"\n");
+			
+			//4.check if year is leap year 
+			var=n->leap(n);
+			System.out.println("1900 is "+(var.check(1900)==1?"Leap year":"Not leap year"));
+			System.out.println("2000 is "+(var.check(2000)==1?"Leap year":"Not leap year"));
+			System.out.println("1992 is "+(var.check(1992)==1?"Leap year":"Not leap year")+"\n");
+			
+			//5.print pattern 
+			var=n->printp(n);
+			var.check(5);
+			
+			//6.Avg of 10 random numbers
+			Runnable r1= ()->randomAvg();
+			Thread t1= new Thread(r1);
+			t1.start();
+			try {t1.join();}
+			catch(Exception e) {}
+			
+			
+			//7. threads to sort integer and characters
+			int[] arr= {12,11,4,56,7,0,1,18};
+			char[] ch_arr="TEST STRING".toCharArray();
+			
+			Runnable r2= ()->{
+								Arrays.sort(arr);
+								for(int i:arr)
+								System.out.print(i+" ");
+								};
+			Thread t2= new Thread(r2);
+			t2.start();
+			try {t2.join();}
+			catch(Exception e) {}
+			
+			Runnable r3= ()->{	Arrays.sort(ch_arr);
+								for(char i:ch_arr)
+								System.out.print(i+" ");
+								};
+			Thread t3= new Thread(r3);
+			t3.start();
+			try {t3.join();}
+			catch(Exception e) {}
+			
+			
+		}
+   }
+

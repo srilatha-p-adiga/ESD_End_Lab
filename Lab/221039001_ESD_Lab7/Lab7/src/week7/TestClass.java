@@ -1,0 +1,22 @@
+package week7;
+
+public class TestClass {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		NumberGenerator numberGenerator = new NumberGenerator();
+        Producer producer = new Producer(numberGenerator);
+        Consumer consumer = new Consumer(numberGenerator);
+        Thread producerThread = new Thread(producer);
+        Thread consumerThread = new Thread(consumer);
+        producerThread.start();
+        consumerThread.start();
+        try {
+            producerThread.join();
+            consumerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+	}
+
+}

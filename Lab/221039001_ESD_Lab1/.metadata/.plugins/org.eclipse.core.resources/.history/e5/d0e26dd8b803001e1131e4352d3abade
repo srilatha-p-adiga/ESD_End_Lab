@@ -1,0 +1,46 @@
+package JavaLabTest;
+
+public class TestLab {
+
+	public static void main(String[] args) {
+		LAB l1;
+		l1=initializeLab();
+		assert(l1.stulist.length==4);
+		assert(l1.stulist[0].assigned.equals(l1.pclist[0]));
+		
+		assert(l1.incharge.name=="Praveen");
+		assert(l1.pclist[0].softList[0].name.equals("ECLIPSE"));
+		
+		l1.incharge.installSoft(l1.pclist[0], new SystemSoftware("UPDATE_utils", 2));
+		assert(l1.pclist[0].softList[2].name.equals("UPDATE_utils"));
+		
+		l1.incharge.uninstallSoft(l1.pclist[0], "SUBLIME");
+		assert(l1.pclist[0].softList[1]==null);
+		
+		l1.incharge.installSoft(l1.pclist[0], new ApplicationSoftware("CHROME", 2));
+		assert(l1.pclist[0].softList[1].name.equals("CHROME"));
+		
+	}
+
+	private static LAB initializeLab() {
+		Software[] sflist= {new ApplicationSoftware("ECLIPSE",15),
+							new ApplicationSoftware("SUBLIME", 2),
+							null,null,null};
+		PC[] pclist={ new PC(1,sflist),
+					  new PC(2,sflist),
+					  new PC(3,sflist),
+					  new PC(4,sflist)};
+		Student[] stu= {new Student("Aneesh", 13,pclist[0]),
+						new Student("Akshay", 13,pclist[1]),
+						new Student("Vishak", 13,pclist[2]),
+						new Student("Vishal", 13,pclist[3])};
+		
+		Instructor inst[]= {new Instructor("BDR", "DD"),
+							new Instructor("CSR", "DSP"),
+							new Instructor("RP", "VP"),
+							};
+		return new LAB("ES LAB", stu, pclist, inst, new LabIncharge("praveen"));
+		
+	}
+
+}
